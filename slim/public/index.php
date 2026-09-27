@@ -16,4 +16,22 @@ $app->get('/', function (Request $request, Response $response, $args) use ($rend
     return $render($request, $response, '/pages/index.latte', $params);
 });
 
+
+$app->get('/todos', function(Request $request, Response $response) use ($render) {
+    $todos = [
+        'hogehoge',
+        'hugahuga'
+    ];
+    return $render( $request, $response, '/todos/index.latte', ['todos' => $todos]);
+});
+
+$app->post('/todos', function(Request $request, Response $response) use ($render) {
+    $title = trim((string) ($request->getParsedBody()['title'] ?? ''));
+    if($title === '' || mb_strlen($title) > 100) {
+        return $response->withStatus(422);
+    }
+    return $render( $request, $response, '/todos/_item.latte', ['todo' => $title]);
+
+});
+
 $app->run();

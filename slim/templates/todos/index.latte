@@ -1,0 +1,21 @@
+{layout '../@layout.latte'}
+
+{block content}
+<h1>Todos</h1>
+<form
+  hx-post="/todos"
+  hx-target="#todo-list"
+  hx-swap="beforeend"
+  hx-on::after-request="this.reset()"
+>
+  <input name="title" required>
+  <button>追加</button>
+</form>
+
+<ul id="todo-list">
+  {foreach $todos as $todo}
+    {include '_item.latte', todo: $todo}
+  {/foreach}
+</ul>
+
+{/block}
