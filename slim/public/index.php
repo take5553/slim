@@ -10,7 +10,7 @@ $app = AppFactory::create();
 
 $app->get('/', function (Request $request, Response $response, $args) use ($render)  {
     $params = [
-        'message' => "hello world! " . date('Y-m-d h:i:s') . implode("", $args)
+        'message' => "hello world! " . date('Y-m-d H:i:s') . implode("", $args)
     ];
 
     return $render($request, $response, '/pages/index.latte', $params);

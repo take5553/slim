@@ -14,6 +14,11 @@ RUN apt-get update \
 
 COPY --from=composer:2.10.3 /usr/bin/composer /usr/bin/composer
 
+# タイムゾーンを日本時間に（OS と PHP の両方）
+ENV TZ=Asia/Tokyo
+RUN ln -snf /usr/share/zoneinfo/${TZ} /etc/localtime && echo ${TZ} > /etc/timezone
+COPY conf/php.ini /usr/local/etc/php/conf.d/zz-custom.ini
+
 # phper ユーザーを作成（UID/GID はホストに合わせられるよう引数化）
 RUN groupadd -g ${GID} phper \
     && useradd -m -u ${UID} -g phper -s /bin/bash phper
