@@ -1,0 +1,73 @@
+# ---- Composer ----
+# vendor は composer install で再生成する（composer.lock はアプリなので追跡する）
+/slim/vendor/
+composer.phar
+
+# ---- 環境変数・認証情報 ----
+# .env.example のような雛形だけをコミットする運用を想定
+.env
+.env.*
+!.env.example
+!.env.*.example
+*.pem
+*.key
+
+# ---- アプリの実行時生成物（logs / cache / var など）----
+/slim/logs/
+/slim/var/
+/slim/storage/
+/slim/cache/
+/slim/tmp/
+# Twig / PHP-DI などのコンパイルキャッシュ
+/slim/var/cache/
+*.log
+
+# ---- SQLite など、ローカルの DB ファイル ----
+*.sqlite
+*.sqlite3
+*.db
+
+# ---- テスト・静的解析のキャッシュと成果物 ----
+.phpunit.result.cache
+.phpunit.cache/
+/slim/coverage/
+clover.xml
+junit.xml
+.php-cs-fixer.cache
+.phpcs-cache
+.phpstan-cache/
+/slim/.phpstan/
+.psalm/
+/slim/.rector-cache/
+
+# ---- フロントエンドを足したとき用 ----
+node_modules/
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+/slim/public/build/
+/slim/public/hot/
+# ビルド出力先として使う想定。手書きの css/img を置くなら、この行は消す
+/slim/public/assets/
+/slim/public/mix-manifest.json
+
+# ---- Docker ----
+# ローカル専用の上書き設定（チームで共有しない）
+compose.override.yml
+docker-compose.override.yml
+/docker/**/data/
+
+# ---- エディタ・IDE ----
+.idea/
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+*.swp
+*.swo
+*~
+
+# ---- OS ----
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db

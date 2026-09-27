@@ -1,0 +1,9 @@
+services:
+  php:
+    build: docker/php
+    volumes:
+      - ./slim:/var/www/html
+    ports:
+      - 8080:80
+    user: phper
+    
