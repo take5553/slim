@@ -1,21 +1,50 @@
 {layout '../@layout.latte'}
 
+{block title}Todos{/block}
+
 {block content}
-<h1>Todos</h1>
-<form
-  hx-post="/todos"
-  hx-target="#todo-list"
-  hx-swap="beforeend"
-  hx-on::after-request="this.reset()"
->
-  <input name="title" required>
-  <button>追加</button>
-</form>
+<article>
 
-<ul id="todo-list">
-  {foreach $todos as $todo}
-    {include '_item.latte', todo: $todo}
-  {/foreach}
-</ul>
+  <header>
+    <hgroup>
+      <h1>Todos</h1>
+      {include counter, remaining: $remaining}
+    </hgroup>
+  </header>
 
+  <form hx-post="/todos" hx-target="#todo-list" hx-swap="beforeend" hx-on::after-request="if (event.detail.successful) this.reset()">
+    <fieldset role="group">
+      <input name="title" placeholder="やること" required maxlength="100" autocomplete="off">
+      <button>追加</button>
+    </fieldset>
+  </form>
+
+  <ul id="todo-list">
+    {foreach $todos as $row}
+      {include item, todo: $row}
+    {/foreach}
+  </ul>
+
+</article>
 {/block}
+
+{define item, array $todo}
+<li id="todo-{$todo['id']}" class="todo">
+  <label>
+    <input type="checkbox" checked={$todo['done']}
+      hx-patch="/todos/{$todo['id']}/toggle" hx-target="closest li" hx-swap="outerHTML"
+    >
+    <span n:class="$todo['done'] ? done">{$todo['title']}</span>
+  </label>
+  <button class="secondary outline"
+    hx-delete="/todos/{$todo['id']}" hx-target="closest li" hx-swap="outerHTML"
+    hx-confirm="「{$todo['title']}」を削除しますか？"
+  >
+    削除
+  </button>
+</li>
+{/define}
+
+{define counter, int $remaining, bool $oob = false}
+<p id="counter" hx-swap-oob={$oob ? 'true' : null}>残り {$remaining} 件</p>
+{/define}

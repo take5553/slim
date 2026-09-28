@@ -11,7 +11,7 @@ final class View
 {
     private Engine $latte;
 
-    public function __construct(string $templateDir = __DIR__ . '/../templates', string $cacheDir = __DIR__ . '/../var/cache/latte', bool $debug = false)
+    public function __construct(string $templateDir, string $cacheDir, bool $debug = false)
     {
         if (!is_dir($cacheDir)) {
             mkdir ($cacheDir, 0775, true);

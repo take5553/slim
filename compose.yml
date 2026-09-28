@@ -6,4 +6,6 @@ services:
     ports:
       - 8080:80
     user: phper
+    environment:
+      APP_DEBUG: "1"
     

@@ -1,0 +1,33 @@
+fieldset[role="group"] button {
+  white-space: nowrap;
+}
+
+#todo-list {
+  padding: 0;
+}
+
+.todo {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: 0.5rem;
+  border-bottom: 1px solid var(--pico-muted-border-color);
+}
+
+.todo label {
+  margin: 0;
+}
+
+.todo button {
+  width: auto;
+  margin: 0;
+  padding: 0.25rem 0.75rem;
+  font-size: 0.875rem;
+}
+
+.done {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
