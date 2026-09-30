@@ -8,4 +8,26 @@ services:
     user: phper
     environment:
       APP_DEBUG: "1"
+      DB_HOST: db
+      DB_PORT: "3306"
+      DB_DATABASE: slim
+      DB_USERNAME: phper
+      DB_PASSWORD: password
+    depends_on:
+      - db
     
+  db:
+    build: docker/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: slim
+      MYSQL_USER: phper
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./docker/mysql/my.cnf:/etc/my.cnf
+
+volumes:
+  mysql_data:

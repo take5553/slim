@@ -10,6 +10,7 @@ RUN apt-get update \
         libzip-dev \
     && docker-php-ext-install \
         zip \
+        pdo_mysql \
     && rm -rf /var/lib/apt/lists/*
 
 COPY --from=composer:2.10.3 /usr/bin/composer /usr/bin/composer
