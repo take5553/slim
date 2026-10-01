@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Todos;
+namespace App\Todo;
 
 use PDO;
 

@@ -3,7 +3,7 @@ namespace App\Home;
 
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use App\Utils\View;
+use Utilities\View;
 
 final class HomeController
 {

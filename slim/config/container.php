@@ -1,8 +1,8 @@
 <?php
 declare(strict_types=1);
 
-use App\Utils;
-use App\Todos;
+use Utilities\View;
+use App\Todo;
 
 return [
     PDO::class => fn () => new PDO(
@@ -20,12 +20,12 @@ return [
         ]
     ),
 
-    Utils\View::class => fn () => new Utils\View(
+    View::class => fn () => new View(
         dirname(__DIR__) . '/templates',
         dirname(__DIR__) . '/var/cache/latte',
         $_ENV['APP_DEBUG'] === '1',
     ),
 
-    Todos\TodoRepository::class => fn (PDO $pdo) => new Todos\TodoRepository($pdo),
+    Todo\TodoRepository::class => fn (PDO $pdo) => new Todo\TodoRepository($pdo),
 
 ];

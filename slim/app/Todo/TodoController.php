@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Todos;
+namespace App\Todo;
 
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use App\Utils\View;
+use Utilities\View;
 use Slim\Exception\HttpNotFoundException;
 
 final class TodoController

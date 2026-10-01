@@ -1,20 +1,22 @@
 <?php
 declare(strict_types=1);
 
-use App\Home\HomeController;
-use App\Todos\TodoController;
 use Slim\App;
-use Slim\Routing\RouteCollectorProxy;
 
 return function (App $app): void {
-    $app->get('/', [HomeController::class, 'index']);
+    $modules = [
+        'Home',
+        'Todo',
+    ];
 
-    $app->group('/todos', function (RouteCollectorProxy $group) {
-        $group->get('', [TodoController::class, 'index']);
-        $group->post('', [TodoController::class, 'store']);
-        $group->patch('/{id:[0-9]+}/toggle', [TodoController::class, 'toggle']);
-        $group->delete('/{id:[0-9]+}', [TodoController::class, 'destroy']);
-
-    });
-
+    foreach ($modules as $module) {
+        $file = dirname(__DIR__) . "/app/{$module}/routes.php";
+        if (!is_file($file)) {
+            if (($_ENV['APP_DEBUG'] ?? '0') === '1') {
+                error_log("routes.php not found: {$file}");
+            }
+            continue;
+        }
+        (require dirname(__DIR__) . "/app/{$module}/routes.php")($app);
+    }
 };
