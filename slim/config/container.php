@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-use Utilities\View;
+use App\Utilities;
 use App\Todo;
 
 return [
@@ -20,7 +20,7 @@ return [
         ]
     ),
 
-    View::class => fn () => new View(
+    Utilities\View::class => fn () => new Utilities\View(
         dirname(__DIR__) . '/templates',
         dirname(__DIR__) . '/var/cache/latte',
         $_ENV['APP_DEBUG'] === '1',

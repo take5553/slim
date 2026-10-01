@@ -1,6 +1,6 @@
 <?php
 
-namespace Utilities;
+namespace App\Utilities;
 
 use Latte\Engine;
 use Latte\Loaders\FileLoader;
