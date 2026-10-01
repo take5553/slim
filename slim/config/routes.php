@@ -5,6 +5,7 @@ use Slim\App;
 
 return function (App $app): void {
     $modules = [
+        'Top',
         'Home',
         'Todo',
     ];

@@ -5,5 +5,5 @@ use App\Home\HomeController;
 use Slim\App;
 
 return function (App $app): void {
-    $app->get('/', [HomeController::class, 'index']);
+    $app->get('/home', [HomeController::class, 'index']);
 };
