@@ -9,7 +9,7 @@ use Slim\Exception\HttpNotFoundException;
 
 final class TodoController
 {
-    private const TEMPLATE = 'todos/index.latte';
+    private const TEMPLATE = 'todo/index.latte';
 
     public function __construct(
         private readonly View $view,
