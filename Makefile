@@ -9,3 +9,8 @@ php :
 
 build :
 	docker compose build
+
+PHINX = docker compose exec -w /var/www/html/db php ../vendor/bin/phinx
+
+migrate :
+	$(PHINX) migrate
