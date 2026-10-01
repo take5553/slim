@@ -1,13 +1,13 @@
 <?php
-namespace App\Pages;
+namespace App\Home;
 
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use App\Utils\View;
 
-final class PageController
+final class HomeController
 {
-    private const TEMPLATE = 'pages/index.latte';
+    private const TEMPLATE = 'home/index.latte';
 
     public function __construct(
         private readonly View $view,

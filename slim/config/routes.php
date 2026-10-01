@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-use App\Pages\PageController;
+use App\Home\HomeController;
 use App\Todos\TodoController;
 use Slim\App;
 use Slim\Routing\RouteCollectorProxy;
 
 return function (App $app): void {
-    $app->get('/', [PageController::class, 'index']);
+    $app->get('/', [HomeController::class, 'index']);
 
     $app->group('/todos', function (RouteCollectorProxy $group) {
         $group->get('', [TodoController::class, 'index']);
