@@ -10,8 +10,34 @@
   <script src="/js/_hyperscript.min.js"></script>
 </head>
 <body>
-  <main class="container">
-    {include content}
-  </main>
+
+  <div class="layout">
+    <aside class="sidebar">
+      <nav _="
+        init
+        for link in <a/> in me
+          if link.pathname is window.location.pathname
+            call link.setAttribute('aria-current', 'page')
+          end
+        end
+      ">
+
+        <ul>
+          <li><strong>Slim App</strong></li>
+        </ul>
+
+        <ul>
+          <li><a href="/">ホーム</a></li>
+          <li><a href="/todos">TODO</a></li>
+        </ul>
+      
+      </nav>
+    </aside>
+
+    <main class="content">
+      {include content}
+    </main>
+
+  </div>
 </body>
 </html>

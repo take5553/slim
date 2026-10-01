@@ -23,7 +23,7 @@ return [
     Utils\View::class => fn () => new Utils\View(
         dirname(__DIR__) . '/templates',
         dirname(__DIR__) . '/var/cache/latte',
-        getenv('APP_DEBUG') === '1',
+        $_ENV['APP_DEBUG'] === '1',
     ),
 
     Todos\TodoRepository::class => fn (PDO $pdo) => new Todos\TodoRepository($pdo),
