@@ -1,12 +1,14 @@
 <?php
 use Slim\Factory\AppFactory;
 use DI\ContainerBuilder;
+use Dotenv\Dotenv;
 
 require __DIR__ . '/../vendor/autoload.php';
 
-$root = dirname(__DIR__);
-$debug = getenv('APP_DEBUG') === '1';
+$dotenv = Dotenv::createImmutable(__DIR__ . '/../');
+$dotenv->load();
 
+$debug = $_ENV['APP_DEBUG'] === '1';
 
 $container = (new ContainerBuilder())
     ->addDefinitions(__DIR__ . '/../config/container.php')
