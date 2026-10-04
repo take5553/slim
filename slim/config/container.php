@@ -5,6 +5,7 @@ use App\Utilities;
 use App\Todo;
 use App\Auth;
 use League\OAuth2\Client\Provider\Github;
+use League\OAuth2\Client\Provider\Google;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Slim\Psr7\Factory\ResponseFactory;
 
@@ -40,6 +41,10 @@ return [
             'clientSecret' => $_ENV['GITHUB_CLIENT_SECRET'],
             'redirectUri' => $_ENV['APP_URL'] . '/auth/github/callback'
         ]),
-
+        'google' => new Google([
+            'clientId' => $_ENV['GOOGLE_CLIENT_ID'],
+            'clientSecret' => $_ENV['GOOGLE_CLIENT_SECRET'],
+            'redirectUri' => $_ENV['APP_URL'] . '/auth/google/callback'
+        ]),
     ]),
 ];
