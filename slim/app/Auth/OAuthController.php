@@ -16,6 +16,7 @@ final class OAuthController
     public function __construct(
         private readonly array $providers,
         private readonly Session $session,
+        private readonly UserRepository $users,
     ) { }
 
     public function redirect(Request $req, Response $res, array $args): Response
@@ -49,7 +50,12 @@ final class OAuthController
 
         $data = $owner->toArray();
         // ユーザーをDBから取得するか、新規作成するか
-        $userId = 0; //未作成
+        $userId = $this->users->findOrCreateBySocial(
+            $args['provider'],
+            (string) $owner->getId(),
+            $data['name'] ?? $data['login'] ?? null,
+            $data['email'] ?? null,
+        );
 
         $this->session->regenerate();
         $this->session->set('user_id', $userId);
