@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Auth;
 
+use App\Utilities\Session;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use App\Utilities\View;
@@ -13,10 +14,17 @@ final class LoginController
 
     public function __construct(
         private readonly View $view,
+        private readonly Session $session,
     ) {}
 
     public function index(Request $req, Response $res): Response
     {
         return $this->view->page($req, $res, self::TEMPLATE);
+    }
+
+    public function logout(Request $req, Response $res): Response
+    {
+        $this->session->destroy();
+        return $res->withStatus(302)->withHeader('Location', '/');
     }
 }

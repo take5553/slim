@@ -3,6 +3,11 @@ declare(strict_types=1);
 
 use App\Utilities;
 use App\Todo;
+use App\Auth;
+use League\OAuth2\Client\Provider\Github;
+use League\OAuth2\Client\Provider\Google;
+use Psr\Http\Message\ResponseFactoryInterface;
+use Slim\Psr7\Factory\ResponseFactory;
 
 return [
     PDO::class => fn () => new PDO(
@@ -26,6 +31,20 @@ return [
         $_ENV['APP_DEBUG'] === '1',
     ),
 
+    ResponseFactoryInterface::class => fn () => new ResponseFactory(),
+
     Todo\TodoRepository::class => fn (PDO $pdo) => new Todo\TodoRepository($pdo),
 
+    Auth\OAuthProviderCollection::class => fn () => new Auth\OAuthProviderCollection([
+        'github' => new Github([
+            'clientId' => $_ENV['GITHUB_CLIENT_ID'],
+            'clientSecret' => $_ENV['GITHUB_CLIENT_SECRET'],
+            'redirectUri' => $_ENV['APP_URL'] . '/auth/github/callback'
+        ]),
+        'google' => new Google([
+            'clientId' => $_ENV['GOOGLE_CLIENT_ID'],
+            'clientSecret' => $_ENV['GOOGLE_CLIENT_SECRET'],
+            'redirectUri' => $_ENV['APP_URL'] . '/auth/google/callback'
+        ]),
+    ]),
 ];

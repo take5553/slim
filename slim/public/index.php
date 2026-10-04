@@ -1,4 +1,6 @@
 <?php
+
+use App\Utilities\StartSessionMiddleware;
 use Slim\Factory\AppFactory;
 use DI\ContainerBuilder;
 use Dotenv\Dotenv;
@@ -18,6 +20,7 @@ AppFactory::setContainer($container);
 $app = AppFactory::create();
 $app->addBodyParsingMiddleware();
 $app->addRoutingMiddleware();
+$app->add(StartSessionMiddleware::class);
 $app->addErrorMiddleware($debug, true, true);
 
 (require __DIR__ . '/../config/routes.php')($app);
