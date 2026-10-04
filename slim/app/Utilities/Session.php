@@ -21,4 +21,9 @@ final class Session
 
         session_start();
     }
+
+    public function get(string $key, mixed $default = null): mixed
+    {
+        return $_SESSION[$key] ?? $default;
+    }
 }

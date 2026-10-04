@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 use App\Utilities;
 use App\Todo;
+use Psr\Http\Message\ResponseFactoryInterface;
+use Slim\Psr7\Factory\ResponseFactory;
 
 return [
     PDO::class => fn () => new PDO(
@@ -25,6 +27,8 @@ return [
         dirname(__DIR__) . '/var/cache/latte',
         $_ENV['APP_DEBUG'] === '1',
     ),
+
+    ResponseFactoryInterface::class => fn () => new ResponseFactory(),
 
     Todo\TodoRepository::class => fn (PDO $pdo) => new Todo\TodoRepository($pdo),
 
