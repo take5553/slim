@@ -26,4 +26,9 @@ final class Session
     {
         return $_SESSION[$key] ?? $default;
     }
+
+    public function set(string $key, mixed $value): void
+    {
+        $_SESSION[$key] = $value;
+    }
 }

@@ -5,7 +5,9 @@
         "latte/latte": "^3.1",
         "php-di/php-di": "^7.1",
         "robmorgan/phinx": "^0.16.12",
-        "vlucas/phpdotenv": "^5.7"
+        "vlucas/phpdotenv": "^5.7",
+        "league/oauth2-client": "^2.9",
+        "league/oauth2-github": "^3.1"
     },
     "autoload": {
         "psr-4": {
