@@ -12,16 +12,15 @@ use League\OAuth2\Client\Provider\Exception\IdentityProviderException;
 
 final class OAuthController
 {
-    /** @param array<string, AbstractProvider> $providers */
     public function __construct(
-        private readonly array $providers,
+        private readonly OAuthProviderCollection $providers,
         private readonly Session $session,
         private readonly AuthUserRepository $users,
     ) { }
 
     public function redirect(Request $req, Response $res, array $args): Response
     {
-        $provider = $this->providers[$args['provider']] ?? throw new HttpNotFoundException($req);
+        $provider = $this->providers->get($args['provider']) ?? throw new HttpNotFoundException($req);
 
         $url = $provider->getAuthorizationUrl();
         $this->session->set('oauth_state', $provider->getState());
@@ -31,7 +30,7 @@ final class OAuthController
 
     public function callback(Request $req, Response $res, array $args): Response
     {
-        $provider = $this->providers[$args['provider']] ?? throw new HttpNotFoundException($req);
+        $provider = $this->providers->get($args['provider']) ?? throw new HttpNotFoundException($req);
         $params = $req->getQueryParams();
 
         $state = (string) $this->session->pull('oauth_state', '');

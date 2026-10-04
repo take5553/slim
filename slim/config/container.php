@@ -34,15 +34,12 @@ return [
 
     Todo\TodoRepository::class => fn (PDO $pdo) => new Todo\TodoRepository($pdo),
 
-    Auth\OAuthController::class => fn (Utilities\Session $session, Auth\AuthUserRepository $users) => new Auth\OAuthController(
-        [
-            'github' => new Github([
-                'clientId' => $_ENV['GITHUB_CLIENT_ID'],
-                'clientSecret' => $_ENV['GITHUB_CLIENT_SECRET'],
-                'redirectUri' => $_ENV['APP_URL'] . '/auth/github/callback'
-            ]),
-        ],
-        $session,
-        $users,
-    ),
+    Auth\OAuthProviderCollection::class => fn () => new Auth\OAuthProviderCollection([
+        'github' => new Github([
+            'clientId' => $_ENV['GITHUB_CLIENT_ID'],
+            'clientSecret' => $_ENV['GITHUB_CLIENT_SECRET'],
+            'redirectUri' => $_ENV['APP_URL'] . '/auth/github/callback'
+        ]),
+
+    ]),
 ];
