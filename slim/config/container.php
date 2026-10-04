@@ -34,7 +34,7 @@ return [
 
     Todo\TodoRepository::class => fn (PDO $pdo) => new Todo\TodoRepository($pdo),
 
-    Auth\OAuthController::class => fn (Utilities\Session $session, Auth\UserRepository $users) => new Auth\OAuthController(
+    Auth\OAuthController::class => fn (Utilities\Session $session, Auth\AuthUserRepository $users) => new Auth\OAuthController(
         [
             'github' => new Github([
                 'clientId' => $_ENV['GITHUB_CLIENT_ID'],

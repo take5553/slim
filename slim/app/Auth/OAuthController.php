@@ -16,7 +16,7 @@ final class OAuthController
     public function __construct(
         private readonly array $providers,
         private readonly Session $session,
-        private readonly UserRepository $users,
+        private readonly AuthUserRepository $users,
     ) { }
 
     public function redirect(Request $req, Response $res, array $args): Response

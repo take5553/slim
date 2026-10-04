@@ -5,7 +5,7 @@ namespace App\Auth;
 
 use PDO;
 
-final class UserRepository
+final class AuthUserRepository
 {
     public function __construct(
         private PDO $pdo,
