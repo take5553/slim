@@ -3,6 +3,9 @@ declare(strict_types=1);
 
 use App\Utilities;
 use App\Todo;
+use App\Auth;
+use App\Utilities\Session;
+use League\OAuth2\Client\Provider\Github;
 use Psr\Http\Message\ResponseFactoryInterface;
 use Slim\Psr7\Factory\ResponseFactory;
 
@@ -32,4 +35,14 @@ return [
 
     Todo\TodoRepository::class => fn (PDO $pdo) => new Todo\TodoRepository($pdo),
 
+    Auth\OAuthController::class => fn (Session $session) => new Auth\OAuthController(
+        [
+            'github' => new Github([
+                'clientId' => $_ENV['GITHUB_CLIENT_ID'],
+                'clientSecret' => $_ENV['GITHUB_CLIENT_SECRET'],
+                'redirectUri' => $_ENV['APP_URL'] . '/auth/github/callback'
+            ]),
+        ],
+        $session,
+    ),
 ];
