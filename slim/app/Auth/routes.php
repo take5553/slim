@@ -11,5 +11,6 @@ return function (App $app): void {
         $group->get('', [LoginController::class, 'index']);
         $group->get('/{provider:[a-z]+}', [OAuthController::class, 'redirect']);
         $group->get('/{provider:[a-z]+}/callback', [OAuthController::class, 'callback']);
+        $group->post('/logout', [LoginController::class, 'logout']);
     });
 };

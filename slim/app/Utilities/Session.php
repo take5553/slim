@@ -43,4 +43,10 @@ final class Session
     {
         session_regenerate_id(true);
     }
+
+    public function destroy(): void
+    {
+        $_SESSION = [];
+        session_destroy();
+    }
 }
