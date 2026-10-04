@@ -1,0 +1,24 @@
+<?php
+declare(strict_types=1);
+
+namespace App\Utilities;
+
+final class Session
+{
+    public function start(): void
+    {
+        if (session_status() === PHP_SESSION_ACTIVE) {
+            return;
+        }
+
+        session_set_cookie_params([
+            'lifetime' => 0,
+            'path' => '/',
+            'secure' => str_starts_with($_ENV['APP_URL'] ?? '', 'https://'),
+            'httponly' => true,
+            'samesite' => 'Lax',
+        ]);
+
+        session_start();
+    }
+}
