@@ -7,19 +7,16 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
   <link rel="stylesheet" href="/css/app.css">
   <script src="/js/htmx.min.js"></script>
-  <script src="/js/_hyperscript.min.js"></script>
+  <script defer src="/js/alpine.min.js"></script>
 </head>
 <body>
 
   <div class="layout">
     <aside class="sidebar">
-      <nav _="
-        init
-        for link in <a/> in me
-          if link.pathname is window.location.pathname
-            call link.setAttribute('aria-current', 'page')
-          end
-        end
+      <nav x-data x-init="
+        $el.querySelectorAll('a').forEach(a => {
+          if (a.pathname === location.pathname) a.setAttribute('aria-current', 'page')
+        })
       ">
 
         <ul>
