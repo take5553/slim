@@ -9,6 +9,7 @@ return function (App $app): void {
         'Auth',
         'Home',
         'Todo',
+        'Anki',
     ];
 
     foreach ($modules as $module) {
