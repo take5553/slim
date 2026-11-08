@@ -1,0 +1,31 @@
+.study-status {
+  display: flex;
+  justify-content: space-between;
+  color: var(--pico-muted-color);
+}
+
+/* カードの枠。高さを固定し、はみ出した分は枠の中でスクロールする */
+.study-card {
+  display: flex;
+  flex-direction: column;
+  height: 60dvh;
+  overflow-y: auto;
+  margin-bottom: 1rem;
+  padding: 1.5rem;
+  border: 1px solid var(--pico-muted-border-color);
+  border-radius: var(--pico-border-radius);
+  background: var(--pico-card-background-color);
+  cursor: pointer;
+}
+
+/* 収まるときは縦中央、はみ出すときは上から表示される */
+.study-face {
+  margin-block: auto;
+  text-align: left;
+  white-space: pre-wrap;   /* 改行と行頭の空白をそのまま表示する */
+  overflow-wrap: anywhere; /* 長い英単語や URL も折り返す */
+}
+
+.face-large  { font-size: 1.75rem; line-height: 1.5; }
+.face-normal { font-size: 1.25rem; line-height: 1.6; }
+.face-small  { font-size: 1rem;    line-height: 1.6; }

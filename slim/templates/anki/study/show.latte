@@ -3,12 +3,13 @@
 {block title}学習 - デモの束{/block}
 
 {block head}
+  <link rel="stylesheet" href="/css/anki.css">
   <script type="module" src="/js/anki/main.js"></script>
 {/block}
 
 {block content}
 <div x-data="study">
-  <p x-text="message"></p>
+  {include '_study.latte'}
   <p><a href="/anki/decks/demo">← カード一覧に戻る</a></p>
 </div>
 {/block}

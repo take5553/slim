@@ -1,0 +1,17 @@
+<template x-if="phase === 'study'">
+  <section class="study">
+    <p class="study-status">
+      <span x-text="progress"></span>
+      <span x-text="side"></span>
+    </p>
+
+    <div class="study-card" @click="flip()">
+      <div class="study-face" :class="faceClass" x-text="faceText"></div>
+    </div>
+
+    <div role="group">
+      <button class="secondary" @click="prev()" :disabled="isFirst">前へ</button>
+      <button @click="next()">次へ</button>
+    </div>
+  </section>
+</template>
