@@ -5,13 +5,12 @@
       <span x-text="side"></span>
     </p>
 
-    <div class="study-card" @click="flip()">
+    <div class="study-card" x-ref="card" @click="forward()">
       <div class="study-face" :class="faceClass" x-text="faceText"></div>
     </div>
 
     <div role="group">
-      <button class="secondary" @click="prev()" :disabled="isFirst">前へ</button>
-      <button @click="next()">次へ</button>
+      <button class="secondary" @click="back()" :disabled="isFirstStep">戻る</button>
     </div>
   </section>
 </template>

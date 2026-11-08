@@ -16,6 +16,9 @@
   border-radius: var(--pico-border-radius);
   background: var(--pico-card-background-color);
   cursor: pointer;
+  -webkit-user-select: none; /* Safari 用 */
+  user-select: none;         /* ドラッグやダブルクリックで文字を選択させない */
+  touch-action: manipulation; /* スマホで、連続タップがダブルタップのズームにならないようにする */
 }
 
 /* 収まるときは縦中央、はみ出すときは上から表示される */

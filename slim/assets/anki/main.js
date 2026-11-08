@@ -1,4 +1,4 @@
-import { study } from './view/study.js'
+import { study } from './views/study.js'
 
 document.addEventListener('alpine:init', () => {
 
