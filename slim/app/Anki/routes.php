@@ -11,5 +11,6 @@ use Slim\Routing\RouteCollectorProxy;
 return function (App $app): void {
     $app->group('/anki', function (RouteCollectorProxy $group) {
         $group->get('', [DeckController::class, 'index']);
+        $group->get('/decks/demo', [DeckController::class, 'show']);
     })->add(AuthMiddleware::class);
 };

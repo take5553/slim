@@ -9,7 +9,8 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 
 final class DeckController
 {
-    private const TEMPLATE = 'anki/deck/index.latte';
+    private const TEMPLATE_INDEX = 'anki/deck/index.latte';
+    private const TEMPLATE_SHOW = 'anki/deck/show.latte';
 
     public function __construct(
         private readonly View $view,
@@ -17,7 +18,12 @@ final class DeckController
 
     public function index(Request $req, Response $res): Response
     {
-        return $this->view->page($req, $res, self::TEMPLATE);
+        return $this->view->page($req, $res, self::TEMPLATE_INDEX);
+    }
+
+    public function show(Request $req, Response $res): Response
+    {
+        return $this->view->page($req, $res, self::TEMPLATE_SHOW);
     }
 
 }
