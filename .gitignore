@@ -50,6 +50,7 @@ pnpm-debug.log*
 # ビルド出力先として使う想定。手書きの css/img を置くなら、この行は消す
 /slim/public/assets/
 /slim/public/mix-manifest.json
+/slim/public/js/anki/
 
 # ---- Docker ----
 # ローカル専用の上書き設定（チームで共有しない）
