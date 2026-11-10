@@ -1,0 +1,16 @@
+<template x-if="phase === 'summary'">
+  <section class="study-summary">
+    <h2>まとめ</h2>
+    <ul>
+      <li>出題数: <span x-text="cards.length"></span> 枚</li>
+      <li>暗記済みにした: <span x-text="markedCount('memorized')"></span> 枚</li>
+      <li>苦手にした: <span x-text="markedCount('weak')"></span> 枚</li>
+    </ul>
+
+    <p>
+      <button @click="restart()">もう一度</button>
+      <a href="/anki/decks/demo" role="button" class="secondary">カード一覧へ</a>
+    </p>
+
+  </section>
+</template>

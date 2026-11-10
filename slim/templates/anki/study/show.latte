@@ -1,0 +1,16 @@
+{layout '../../@layout.latte'}
+
+{block title}学習 - デモの束{/block}
+
+{block head}
+  <link rel="stylesheet" href="/css/anki.css">
+  <script type="module" src="/js/anki/main.js"></script>
+{/block}
+
+{block content}
+<div x-data="study" @keydown.window="onKeyDown($event)">
+  {include '_setup.latte'}
+  {include '_study.latte'}
+  {include '_summary.latte'}
+</div>
+{/block}

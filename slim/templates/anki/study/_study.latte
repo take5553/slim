@@ -1,0 +1,37 @@
+<template x-if="phase === 'study'">
+  <section class="study">
+
+    <!-- 上部 -->
+    <p class="study-status">
+      <span x-text="progress"></span>
+      <span x-text="side"></span>
+    </p>
+
+    <!-- カード -->
+    <div class="study-card" x-ref="card" @click="forward()">
+      <div class="study-face" :class="faceClass" x-text="faceText"></div>
+    </div>
+
+    <!-- 暗記済み/苦手 -->
+    <div class="study-flags">
+      <button :class="status === 'memorized' ? '' : 'outline'"
+        :aria-pressed="String(status === 'memorized')"
+        @click="toggleStatus('memorized')"
+      >
+        暗記済み
+      </button>
+      <button :class="status === 'weak' ? 'contrast' : 'contrast outline'"
+        :aria-pressed="String(status === 'weak')"
+        @click="toggleStatus('weak')"
+      >
+        苦手
+      </button>
+    </div>
+
+    <!-- ボタン -->
+    <div class="study-actions">
+      <button class="secondary" @click="back()" :disabled="isFirstStep">戻る</button>
+      <button class="danger" @click="quit()">中断</button>
+    </div>
+  </section>
+</template>

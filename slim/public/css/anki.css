@@ -1,0 +1,68 @@
+.study-status {
+  display: flex;
+  justify-content: space-between;
+  color: var(--pico-muted-color);
+}
+
+/* カードの枠。高さを固定し、はみ出した分は枠の中でスクロールする */
+.study-card {
+  display: flex;
+  flex-direction: column;
+  height: 60dvh;
+  overflow-y: auto;
+  margin-bottom: 1rem;
+  padding: 1.5rem;
+  border: 1px solid var(--pico-muted-border-color);
+  border-radius: var(--pico-border-radius);
+  background: var(--pico-card-background-color);
+  cursor: pointer;
+  -webkit-user-select: none; /* Safari 用 */
+  user-select: none;         /* ドラッグやダブルクリックで文字を選択させない */
+  touch-action: manipulation; /* スマホで、連続タップがダブルタップのズームにならないようにする */
+}
+
+/* 収まるときは縦中央、はみ出すときは上から表示される */
+.study-face {
+  margin-block: auto;
+  text-align: left;
+  white-space: pre-wrap;   /* 改行と行頭の空白をそのまま表示する */
+  overflow-wrap: anywhere; /* 長い英単語や URL も折り返す */
+}
+
+.face-large  { font-size: 1.75rem; line-height: 1.5; }
+.face-normal { font-size: 1.25rem; line-height: 1.6; }
+.face-small  { font-size: 1rem;    line-height: 1.6; }
+
+/* 暗記済み・苦手: 内容の幅で、右寄せの横並び */
+.study-flags {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+/* 戻る・中断: 幅いっぱいで縦並び */
+.study-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.study-flags > *,
+.study-actions > * {
+  margin: 0; /* Pico が付ける余白を消し、gap だけで間隔を決める */
+}
+
+/* 赤いボタン（中断など） */
+button.danger {
+  --pico-background-color: #c62828;
+  --pico-border-color: #c62828;
+  --pico-color: #fff;
+  --pico-primary-focus: rgba(198, 40, 40, 0.4); /* フォーカスの枠の色 */
+}
+
+button.danger:is(:hover, :active, :focus) {
+  --pico-background-color: #a51d1d;
+  --pico-border-color: #a51d1d;
+  --pico-color: #fff;
+}

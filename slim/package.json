@@ -1,0 +1,11 @@
+{
+  "name": "slim-assets",
+  "private": true,
+  "scripts": {
+    "build": "esbuild assets/anki/main.js --bundle --splitting --format=esm --minify --outdir=public/js/anki",
+    "watch": "esbuild assets/anki/main.js --bundle --splitting --format=esm --sourcemap --outdir=public/js/anki --watch"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2"
+  }
+}

@@ -22,5 +22,13 @@ services:
       - mysql_data:/var/lib/mysql
       - ./docker/mysql/my.cnf:/etc/my.cnf
 
+  node:
+    image: node:26.13.0-alpine
+    working_dir: /app
+    user: node
+    volumes:
+      - ./slim:/app
+    profiles: ["tools"]
+
 volumes:
   mysql_data:
