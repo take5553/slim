@@ -9,7 +9,8 @@
 
 {block content}
 <div x-data="study">
+  {include '_setup.latte'}
   {include '_study.latte'}
-  <p><a href="/anki/decks/demo">← カード一覧に戻る</a></p>
+  {include '_summary.latte'}
 </div>
 {/block}

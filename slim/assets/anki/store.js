@@ -125,3 +125,9 @@ const DEMO_CARDS = [
 // 束の全カードを返す
 // 呼び出し側でカードを書き換えても固定のデータが変わらないよう、複製して渡す
 export const loadCards = async () => structuredClone(DEMO_CARDS)
+
+// カードの状態（ none / memorized / weak ）を変える
+// directionはf2bかb2f
+export const setStatus = (card, direction, status) => {
+  card[`${direction}_status`] = status
+}

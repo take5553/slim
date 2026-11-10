@@ -11,6 +11,18 @@
 
     <div role="group">
       <button class="secondary" @click="back()" :disabled="isFirstStep">戻る</button>
+      <button :class="status === 'memorized' ? '' : 'outline'"
+        :aria-pressed="String(status === 'memorized')"
+        @click="toggleStatus('memorized')"
+      >
+        暗記済み
+      </button>
+      <button :class="status === 'weak' ? 'contrast' : 'contrast outline'"
+        :aria-pressed="String(status === 'weak')"
+        @click="toggleStatus('weak')"
+      >
+        苦手
+      </button>
     </div>
   </section>
 </template>

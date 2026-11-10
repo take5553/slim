@@ -1,14 +1,41 @@
-import { loadCards } from '../store.js'
+import { loadCards, setStatus } from '../store.js'
 
 export const study = () => ({
+  // loading -> setup -> study -> summary -> setup
   phase: 'loading',
+  direction: 'f2b',
+
+  // 学習設定
+  allCards: [],
+  countMode: 'all',
+  limit: 5,
+
+  // 学習中
   cards: [],
   step: 0,
+  marked: {},
 
   async init() {
-    this.cards = await loadCards()
+    this.allCards = await loadCards()
+    this.phase = 'setup'
+  },
+
+  // ---- 学習設定 ----
+  get studyCount() {
+    if (this.countMode === 'all') return this.allCards.length
+    const n = Math.floor(Number(this.limit))
+    return n > 0 ? Math.min(n, this.allCards.length) : 0
+  },
+  
+  start() {
+    if (this.studyCount === 0) return
+    this.cards = this.allCards.slice(0, this.studyCount)
+    this.step = 0
+    this.marked = {}
     this.phase = 'study'
   },
+
+  // ---- 学習 -----
 
   get index() {
     return Math.floor(this.step / 2)
@@ -37,9 +64,15 @@ export const study = () => ({
   get faceClass() {
     return 'face-' + (this.flipped ? this.card.back_size : this.card.front_size)
   },
+  get status() {
+    return this.card[`${this.direction}_status`]
+  },
 
   forward() {
-    if (this.isLastStep) return
+    if (this.isLastStep) {
+      this.phase = 'summary'
+      return
+    }
     this.goTo(this.step + 1)
   },
   back() {
@@ -49,5 +82,21 @@ export const study = () => ({
   goTo(step) {
     this.step = step
     this.$refs.card.scrollTop = 0
+  },
+
+  // 同じフラグをもう一度押すと未設定に戻す
+  toggleStatus(status) {
+    const next = this.status === status ? 'none' : status
+    setStatus(this.card, this.direction, next)
+    this.marked[this.card.uuid] = next
+  },
+
+  // ---- まとめ ----
+
+  markedCount(status) {
+    return Object.values(this.marked).filter((s) => s === status).length
+  },
+  restart() {
+    this.phase = 'setup'
   }
 })
