@@ -52,3 +52,17 @@
 .study-actions > * {
   margin: 0; /* Pico が付ける余白を消し、gap だけで間隔を決める */
 }
+
+/* 赤いボタン（中断など） */
+button.danger {
+  --pico-background-color: #c62828;
+  --pico-border-color: #c62828;
+  --pico-color: #fff;
+  --pico-primary-focus: rgba(198, 40, 40, 0.4); /* フォーカスの枠の色 */
+}
+
+button.danger:is(:hover, :active, :focus) {
+  --pico-background-color: #a51d1d;
+  --pico-border-color: #a51d1d;
+  --pico-color: #fff;
+}

@@ -31,7 +31,7 @@
     <!-- ボタン -->
     <div class="study-actions">
       <button class="secondary" @click="back()" :disabled="isFirstStep">戻る</button>
-      <a href="/anki/decks/demo" role="button" class="secondary outline">中断</a>
+      <button class="danger" @click="quit()">中断</button>
     </div>
   </section>
 </template>

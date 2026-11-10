@@ -98,6 +98,10 @@ export const study = () => ({
     action(this)
   },
 
+  quit() {
+    this.phase = 'setup'
+  },
+
   // ---- まとめ ----
 
   markedCount(status) {
