@@ -8,7 +8,7 @@
 {/block}
 
 {block content}
-<div x-data="study">
+<div x-data="study" @keydown.window="onKeyDown($event)">
   {include '_setup.latte'}
   {include '_study.latte'}
   {include '_summary.latte'}

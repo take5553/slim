@@ -1,5 +1,6 @@
 import { loadCards, setStatus } from '../store.js'
 import { countToStudy, pickCards } from '../query.js'
+import { studyKeyAction } from '../shortcuts.js'
 
 export const study = () => ({
   // loading -> setup -> study -> summary -> setup
@@ -87,6 +88,14 @@ export const study = () => ({
     const next = this.status === status ? 'none' : status
     setStatus(this.card, this.direction, next)
     this.marked[this.card.uuid] = next
+  },
+
+  onKeyDown(event) {
+    if (this.phase !== 'study') return
+    const action = studyKeyAction(event)
+    if (!action) return
+    event.preventDefault()
+    action(this)
   },
 
   // ---- まとめ ----
