@@ -32,3 +32,23 @@
 .face-large  { font-size: 1.75rem; line-height: 1.5; }
 .face-normal { font-size: 1.25rem; line-height: 1.6; }
 .face-small  { font-size: 1rem;    line-height: 1.6; }
+
+/* 暗記済み・苦手: 内容の幅で、右寄せの横並び */
+.study-flags {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+/* 戻る・中断: 幅いっぱいで縦並び */
+.study-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.study-flags > *,
+.study-actions > * {
+  margin: 0; /* Pico が付ける余白を消し、gap だけで間隔を決める */
+}

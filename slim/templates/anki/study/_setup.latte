@@ -2,16 +2,13 @@
   <form class="study-setup" @submit.prevent="start()">
     <h2>学習設定</h2>
 
-    <fieldset>
-      <legend>枚数</legend>
-      <label><input type="radio" name="count-mode" value="all" x-model="countMode">全部</label>
-      <label><input type="radio" name="count-mode" value="limit" x-model="countMode">枚数を指定</label>
-    </fieldset>
+    <label>
+      枚数
+      <input type="number" min="0" x-model="limit" placeholder="0、または未入力で全カード">
+    </label>
 
-    <input type="number" min="1" :max="allCards.length" x-model="limit"
-      x-show="countMode === 'limit'" aria-label="出題する枚数">
     <p>該当 <span x-text="allCards.length"></span> 件 / 出題 <span x-text="studyCount"></span> 件</p>
 
-    <button type="submit" :disabled="studyCount === 0">開始</button>
+    <button type="submit">開始</button>
   </form>
 </template>

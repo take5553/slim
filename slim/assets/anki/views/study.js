@@ -1,4 +1,5 @@
 import { loadCards, setStatus } from '../store.js'
+import { countToStudy, pickCards } from '../query.js'
 
 export const study = () => ({
   // loading -> setup -> study -> summary -> setup
@@ -7,8 +8,7 @@ export const study = () => ({
 
   // 学習設定
   allCards: [],
-  countMode: 'all',
-  limit: 5,
+  limit: '',
 
   // 学習中
   cards: [],
@@ -22,14 +22,12 @@ export const study = () => ({
 
   // ---- 学習設定 ----
   get studyCount() {
-    if (this.countMode === 'all') return this.allCards.length
-    const n = Math.floor(Number(this.limit))
-    return n > 0 ? Math.min(n, this.allCards.length) : 0
+    return countToStudy(this.allCards.length, this.limit)
   },
   
   start() {
-    if (this.studyCount === 0) return
-    this.cards = this.allCards.slice(0, this.studyCount)
+    this.cards = pickCards(this.allCards, this.limit)
+    if (this.cards.length === 0) return
     this.step = 0
     this.marked = {}
     this.phase = 'study'
